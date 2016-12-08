@@ -1,5 +1,11 @@
 # image_boxing
 
+Where to put:
+
+    you need to have a folder "input/" with "train/" and "test_stg1/" as direct subfolders. 
+    
+    This code should be put into parent fodler of "input/".
+
 Functions of keys:
 
   Before you use any key, you must click on the image first.
