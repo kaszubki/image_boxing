@@ -3,8 +3,11 @@
 Functions of keys:
 
   When a window with cropped image is open:
+  
     's' -> save this box and close window. Remembers a box and shows it in blue.
+    
     any other key -> close window without saving this box
+    
   Otherwise:
     'q', escape -> save csv file and quit
     'n', space, right arrow -> go to next picture
