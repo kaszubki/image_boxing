@@ -6,8 +6,8 @@ from time import time
 import ast
 import pandas as pd
 
-TRAIN_PATH = "input/test_stg1/"
-CROPPED_FISH_PATH = "output/crops/test/"
+PATH_INPUT = "input/"
+PATH_OUTPUT = "output/crops/"
 MAIN_WINDOW_NAME = "Let's draw some rectangles!"
 
 RIGHT_ARROW = 65363
@@ -196,11 +196,25 @@ def on_mouse(event, x, y, flags, params):
 
 def exit_program():
     cv2.destroyAllWindows()
-    for _ in xrange(5): # the only way to successfully close and finish
+    for _ in xrange(5): # the only way to successfully close windows and finish
         cv2.waitKey(1)
     raise ValueError('exiting')
-            
-def gogogo(folder):
+
+def paths_for_given_purpose(purpose):
+    purpose = purpose.upper()
+    if purpose == "TEST":
+        path_in = PATH_INPUT + "test_stg1/"
+        path_out = PATH_OUTPUT + "test_stg1/"
+    else:
+        folders = ['ALB', 'BET', 'DOL', 'LAG', 'NoF', 'OTHER', 'SHARK', 'YFT']
+        if purpose not in folders:
+            raise ValueError("Wrong fish")
+        else:
+            path_in = PATH_INPUT + "train/" + purpose + "/"
+            path_out = PATH_OUTPUT + purpose + "/"
+    return (path_in, path_out)
+    
+def gogogo(purpose):
     """
         TODO(kaszubki): and saving csv not only at the end
     """
@@ -208,15 +222,12 @@ def gogogo(folder):
     global boxes
     global current_fish
     global drawing
-    #folders = ['ALB', 'BET', 'DOL', 'LAG', 'NoF', 'OTHER', 'SHARK', 'YFT']
-    #if folder not in folders:
-    #    raise ValueError("Wrong fish")
-    path_in = TRAIN_PATH + folder + "/"
-    file_names = check_output(["ls", path_in]).decode("utf8").strip().split('\n')
     
+    path_in, path_out = paths_for_given_purpose(purpose)
+    
+    file_names = check_output(["ls", path_in]).decode("utf8").strip().split('\n')
     image_names = [x for x in file_names if x[-4:]==".jpg"]
     image_paths = [path_in + img for img in image_names]
-    path_out = CROPPED_FISH_PATH + folder + "/"
     if not os.path.exists(path_out):
         os.makedirs(path_out)
 
@@ -234,7 +245,7 @@ def gogogo(folder):
     
     try:
         fish_index = 0
-        display_helper = 0
+        display_helper = 0 # 0 if starting, 1 if need refresh, 2 otherwise
         while True:
             current_fish = fishes[fish_index]
             while True:
@@ -248,7 +259,7 @@ def gogogo(folder):
                 
                 key = cv2.waitKey(0) & 0xEFFFFF # wait for a key
                 
-                if drawing is True:
+                if drawing is True: # key pressed while drawing - ignore
                     display_helper = 2
                     continue
                 
@@ -290,5 +301,6 @@ def gogogo(folder):
     return
 
 if __name__ == "__main__":
-    #folder = raw_input()
-    gogogo("")
+    print "what do you want to crop? ('test' or fish name)"
+    purpose = raw_input()
+    gogogo(purpose)
