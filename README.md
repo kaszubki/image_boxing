@@ -2,7 +2,7 @@
 
 Functions of keys:
 
-  Before you use any key, you need to click on the image first.
+  Before you use any key, you must click on the image first.
 
   When a window with cropped image is open:
   
