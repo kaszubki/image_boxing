@@ -22,9 +22,9 @@ Functions of keys:
     
 Functions of mouse:
 
-  left button down -> start drawing a rectangle. Color of a box that is currently being drawn is light green, color of already remembered is blue.
+    left button down -> start drawing a rectangle. Color of a box that is currently being drawn is light green, color of already remembered is blue.
   
-  right button down -> if currently drawing, ends it.
+    right button down -> if currently drawing, ends it.
   
-  left button up -> if currently drawing, ends it and shows a window with cropped image.
+    left button up -> if currently drawing, ends it and shows a window with cropped image.
   
