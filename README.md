@@ -2,6 +2,8 @@
 
 Functions of keys:
 
+  Before you use any key, you need to click on the image first.
+
   When a window with cropped image is open:
   
     's' -> save this box and close window. Remembers a box and shows it in blue.
