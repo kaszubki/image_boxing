@@ -1,6 +1,7 @@
 # image_boxing
 
 Functions of keys:
+
   When a window with cropped image is open:
     's' -> save this box and close window. Remembers a box and shows it in blue.
     any other key -> close window without saving this box
